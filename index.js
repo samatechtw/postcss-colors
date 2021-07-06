@@ -69,6 +69,13 @@ function handleRgba(decl, result) {
     // Check for the hex value
     if(nodes[0].value.startsWith('#')) {
       const hex = nodes[0].value.slice(1);
+      if(hex.length !== 3 && hex.length !== 6) {
+        result.warn(
+          'Only 3 or 6 character hex allowed in rgba',
+          { node: decl, word: nodes[0].value },
+        );
+        return;
+      }
       const rgba = hexToRgba(hex);
 
       // If conversion fails, emit a warning

@@ -1,20 +1,7 @@
-const postcss = require('postcss');
-
-const plugin = require('../');
-
-function checkResult (result, expected) {
-  expect(result.css).toEqual(expected);
-  expect(result.warnings()).toHaveLength(0);
-  return result;
-}
-
-function run (input, output, opts) {
-  const result = postcss([plugin(opts)]).process(input, { from: '/test.css' });
-  return checkResult(result, output);
-}
+const { run, runError } = require('./util');
 
 it('works with basic hex colors', () => {
-  run(`.a { color: rgba(#00000000); }`, `.a { color: rgba(0,0,0,0); }`);
+  run(`.a { color: rgba(#000000, 1); }`, `.a { color: rgba(0,0,0, 1); }`);
   run(`.a {
     color: rgb(#000000);
     background-color: rgba(#ffffff, 0.5);
@@ -57,5 +44,20 @@ it('works with linear-gradient', () => {
       background-image: linear-gradient(#f00, rgba(255,0,0, 0.2)),
         linear-gradient(#0f0, rgba(0,255,0, 0.2));
     }`,
+  );
+});
+
+it('fails with 4/8 char hex colors', () => {
+  runError(
+    `.a { color: rgba(#abcd, 1); }`,
+    'Only 3 or 6 character hex allowed in rgba',
+  );
+  runError(
+    `.a { color: rgba(#aabbccdd); }`,
+    'Only 3 or 6 character hex allowed in rgba',
+  );
+  runError(
+    `.a { color: rgb(#abcd); }`,
+    'Only 3 or 6 character hex allowed in rgba',
   );
 });
