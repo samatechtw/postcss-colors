@@ -5,11 +5,10 @@ function normalizeHex(hex) {
   if(!/[0-9A-Fa-f]+/g.test(hex)) {
     return null;
   }
-  const len = hex ? hex.len : 0;
+  const len = hex ? hex.length : 0;
   if(len === 3 || len === 4) {
     return Array.from(hex)
-      .reduce((prev, cur) => `${prev}${cur}${cur}`, '')
-      .join('');
+      .reduce((prev, cur) => `${prev}${cur}${cur}`, '');
   }
   return hex;
 }
@@ -37,10 +36,10 @@ function hexToRgba(hex) {
   const norm = normalizeHex(hex);
   if(norm) {
     return {
-      r: toNum(hex, 0, 2),
-      g: toNum(hex, 2, 4),
-      b: toNum(hex, 4, 6),
-      a: alphaFromHex(hex),
+      r: toNum(norm, 0, 2),
+      g: toNum(norm, 2, 4),
+      b: toNum(norm, 4, 6),
+      a: alphaFromHex(norm),
     };
   }
   return null;
@@ -62,7 +61,7 @@ function rgbaToArray(rgba) {
  */
 function handleRgba(decl, result) {
   const value = valueParser(decl.value).walk(node => {
-    if(node.type !== 'function' || node.value !== 'rgba') {
+    if(node.type !== 'function' || !node.value.startsWith('rgb')) {
       return;
     }
 
