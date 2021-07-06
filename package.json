@@ -1,0 +1,44 @@
+{
+  "name": "@samatech/postcss-colors",
+  "version": "0.1.0",
+  "description": "PostCSS plugin that provides various color related transforms",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "color",
+    "hexrgba",
+    "rgba"
+  ],
+  "author": "SamaTech <samatechtw@gmail.com>",
+  "license": "MIT",
+  "repository": "samatechtw/postcss-colors",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "peerDependencies": {
+    "postcss": "^8.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.6",
+    "postcss": "^8.3.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "statements": 100
+      }
+    }
+  },
+  "dependencies": {
+    "postcss-value-parser": "^4.1.0"
+  }
+}
