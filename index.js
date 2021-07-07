@@ -1,8 +1,10 @@
 const valueParser = require('postcss-value-parser');
 
 
+const PRECISION = 10000;
+
 function normalizeHex(hex) {
-  if(!/[0-9A-Fa-f]+/g.test(hex)) {
+  if(!/^[0-9A-Fa-f]{3,}$/g.test(hex)) {
     return null;
   }
   const len = hex ? hex.length : 0;
@@ -23,7 +25,8 @@ const toNum = (hex, start, end) => (
  */
 function alphaFromHex(hex) {
   if(hex.length === 8) {
-    return toNum(hex, 6, 8) / 255;
+    const alpha = toNum(hex, 6, 8) / 255;
+    return Math.round(alpha * PRECISION) / PRECISION;
   }
   return null;
 }
@@ -56,15 +59,14 @@ function rgbaToArray(rgba) {
 }
 
 /**
- * CSS rgba rule handler
- * @param  {string} decl CSS declaration
+ * rgb/rgba rule handler
+ * @param {string} decl CSS declaration
  */
 function handleRgba(decl, result) {
   const value = valueParser(decl.value).walk(node => {
     if(node.type !== 'function' || !node.value.startsWith('rgb')) {
       return;
     }
-
     const nodes = node.nodes;
     // Check for the hex value
     if(nodes[0].value.startsWith('#')) {
@@ -92,13 +94,52 @@ function handleRgba(decl, result) {
   decl.value = value;
 }
 
+/**
+ * Hexa to rgba handler
+ * @param {string} decl CSS declaration
+ */
+function handleHexa(decl, result) {
+  const ignore = {};
+  const value = valueParser(decl.value).walk(node => {
+    // Special case for `url(#ref)`
+    if(node.type === 'function' && node.value === 'url') {
+      ignore[node.nodes[0].value] = true;
+      return;
+    }
+    if(ignore[node.value] || node.type !== 'word' || !node.value.startsWith('#')) {
+      return;
+    }
+    const hex = node.value.slice(1);
+    if(hex.length !== 4 && hex.length !== 8) {
+      return;
+    }
+    const rgba = hexToRgba(hex);
+
+    // If conversion fails, emit a warning
+    if(rgba === null) {
+      result.warn('Invalid hex', { node: decl, word: node.value });
+      return;
+    }
+
+    // Replace node's value with rgba
+    node.value = 'rgba';
+    node.type = 'function';
+    node.nodes = [{ value: [rgbaToArray(rgba)] }];
+  }).toString();
+
+  decl.value = value;
+
+}
+
 module.exports = () => {
   return {
     postcssPlugin: '@samatech/postcss-colors',
 
     Declaration(decl, { result }) {
-      if(decl.value.includes('rgba') || decl.value.includes('rgb')) {
+      if(decl.value.includes('rgb')) {
         handleRgba(decl, result);
+      } else if(decl.value.includes('#')) {
+        handleHexa(decl, result);
       }
     },
   };
