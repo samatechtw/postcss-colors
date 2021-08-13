@@ -1,6 +1,6 @@
 {
   "name": "@samatech/postcss-colors",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "PostCSS plugin that provides various color related transforms",
   "keywords": [
     "postcss",
@@ -14,21 +14,36 @@
   "license": "MIT",
   "repository": "samatechtw/postcss-colors",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "eslint --ext .js index.js test/",
+    "format": "eslint --fix --ext .js index.js test/"
   },
   "engines": {
     "node": ">=12.0"
   },
   "peerDependencies": {
-    "postcss": "^8.3.5"
+    "postcss": "^8.3.6"
   },
   "devDependencies": {
-    "eslint": "^7.30.0",
+    "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettierx": "^0.18.0",
+    "eslint-plugin-promise": "^5.1.0",
     "jest": "^27.0.6",
-    "postcss": "^8.3.5"
+    "postcss": "^8.3.6"
+  },
+  "dependencies": {
+    "postcss-value-parser": "^4.1.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "jest/globals": true
+    },
+    "plugins": ["jest", "prettierx"],
+    "extends": ["eslint-config-standard", "plugin:prettierx/standardize"]
   },
   "jest": {
     "testEnvironment": "node",
@@ -37,8 +52,5 @@
         "statements": 100
       }
     }
-  },
-  "dependencies": {
-    "postcss-value-parser": "^4.1.0"
   }
 }
