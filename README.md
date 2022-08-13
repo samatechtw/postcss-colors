@@ -60,8 +60,8 @@ module.exports = {
 
 ## Inspiration
 
-This original purpose behind this plugin was to have an actively maintained version of [`postcss-hexrgba`](https://github.com/madeleineostoja/postcss-hexrgba). That plugin has had Postcss8 support implemented in a [pull request](https://github.com/hudochenkov/postcss-hexrgba#migrate-to-postcss-8) for some time, and it seems unlikely to be merged.
+This original purpose behind this plugin was to update [`postcss-hexrgba`](https://github.com/madeleineostoja/postcss-hexrgba) to support PostCSS 8. `postcss-hexrgba` has since been updated.
 
-Since the abstractions for converting hex to rgba are similar to those in [`postcss-color-hex-alpha`](https://github.com/postcss/postcss-color-hex-alpha), it made sense to include that functionality as well.
+The abstractions for converting hex to rgba are similar to those in [`postcss-color-hex-alpha`](https://github.com/postcss/postcss-color-hex-alpha), so that functionality is included in this library as well.
 
 Adding a custom alpha syntax for hex colors may be considered, similar to [`postcss-color-alpha`](https://github.com/avanes/postcss-color-alpha)
