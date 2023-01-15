@@ -2,7 +2,7 @@ const valueParser = require('postcss-value-parser')
 
 const PRECISION = 10000
 
-function normalizeHex (hex) {
+function normalizeHex(hex) {
   if (!/^[0-9A-Fa-f]{3,}$/g.test(hex)) {
     return null
   }
@@ -19,7 +19,7 @@ const toNum = (hex, start, end) => parseInt(hex.slice(start, end), 16)
  * Returns alpha value of a hex string.
  * If there is none, return null
  */
-function alphaFromHex (hex) {
+function alphaFromHex(hex) {
   if (hex.length === 8) {
     const alpha = toNum(hex, 6, 8) / 255
     return Math.round(alpha * PRECISION) / PRECISION
@@ -31,7 +31,7 @@ function alphaFromHex (hex) {
  * Converts 3 and 4 char hex strings to 6 or 8 char string
  * Validates proper hex-ness
  */
-function hexToRgba (hex) {
+function hexToRgba(hex) {
   const norm = normalizeHex(hex)
   if (norm) {
     return {
@@ -46,7 +46,7 @@ function hexToRgba (hex) {
 
 // Converts RGBA object `{ r: 0, g: 0, b: 0, a: 0 } to array
 // Result is length 4 if `a` is present, otherwise 3
-function rgbaToArray (rgba) {
+function rgbaToArray(rgba) {
   const { r, g, b, a } = rgba
   if (rgba.a !== null) {
     return [r, g, b, a]
@@ -58,9 +58,9 @@ function rgbaToArray (rgba) {
  * rgb/rgba rule handler
  * @param {string} decl CSS declaration
  */
-function handleRgba (decl, result) {
+function handleRgba(decl, result) {
   const value = valueParser(decl.value)
-    .walk(node => {
+    .walk((node) => {
       if (node.type !== 'function' || !node.value.startsWith('rgb')) {
         return
       }
@@ -96,10 +96,10 @@ function handleRgba (decl, result) {
  * Hexa to rgba handler
  * @param {string} decl CSS declaration
  */
-function handleHexa (decl, result) {
+function handleHexa(decl, result) {
   const ignore = {}
   const value = valueParser(decl.value)
-    .walk(node => {
+    .walk((node) => {
       // Special case for `url(#ref)`
       if (node.type === 'function' && node.value === 'url') {
         ignore[node.nodes[0].value] = true
@@ -134,7 +134,7 @@ module.exports = () => {
   return {
     postcssPlugin: '@samatech/postcss-colors',
 
-    Declaration (decl, { result }) {
+    Declaration(decl, { result }) {
       if (decl.value.includes('rgb')) {
         handleRgba(decl, result)
       } else if (decl.value.includes('#')) {

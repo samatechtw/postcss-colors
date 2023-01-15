@@ -2,7 +2,7 @@ const postcss = require('postcss')
 
 const plugin = require('../')
 
-function runError (input, error) {
+function runError(input, error) {
   const result = postcss([plugin()]).process(input, { from: '/test.css' })
   const warnings = result.warnings()
   expect(result.css).toEqual(input)
@@ -11,7 +11,7 @@ function runError (input, error) {
   return result
 }
 
-function run (input, output, opts) {
+function run(input, output, opts) {
   const result = postcss([plugin(opts)]).process(input, { from: '/test.css' })
   expect(result.css).toEqual(output)
   expect(result.warnings()).toHaveLength(0)

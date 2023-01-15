@@ -20,7 +20,7 @@ describe('Tests for converting 4/8 character hex to rgba', () => {
       color: rgba(204,0,255,0);
       content: "#ffff";
       content: "#0000ff00";
-    }`
+    }`,
     )
   })
 
@@ -33,7 +33,7 @@ describe('Tests for converting 4/8 character hex to rgba', () => {
       `.a {
       background: #9d9 linear-gradient(rgba(152,35,248,0.6627), rgba(152,35,248,0.2039));
       background: linear-gradient(rgba(152,35,248,0.6627), rgba(152,35,248,0.2039));
-    }`
+    }`,
     )
   })
 

@@ -17,7 +17,7 @@ describe('Tests for converting hex within rgb/rgba functions', () => {
       background: rgba(0,178,255,.8);
       border: rgba( 255,255,255, .2 ) 1px solid;
       border-bottom-color: rgba(  255,255,255 , .2 );
-    }`
+    }`,
     )
   })
 
@@ -32,7 +32,7 @@ describe('Tests for converting hex within rgb/rgba functions', () => {
       color: rgba(255,255,255, 0.5);
       background: rgba(0,0,0, .8);
       border: 1px solid rgba(255,0,0, 0.2) !important;
-    }`
+    }`,
     )
   })
 
@@ -47,7 +47,7 @@ describe('Tests for converting hex within rgb/rgba functions', () => {
         background: linear-gradient(rgba(15,171,83,.1), rgba(0, 0, 0, 0.2), rgba(255,255,255, 0.2));
         background-image: linear-gradient(#f00, rgba(255,0,0, 0.2)),
           linear-gradient(#0f0, rgba(0,255,0, 0.2));
-      }`
+      }`,
     )
   })
 
@@ -57,7 +57,10 @@ describe('Tests for converting hex within rgb/rgba functions', () => {
 
   it('fails when hex has wrong number of characters', () => {
     runError('.a { color: rgba(#abcd, 1); }', 'Only 3 or 6 character hex allowed in rgba')
-    runError('.a { color: rgba(#aabbccdd); }', 'Only 3 or 6 character hex allowed in rgba')
+    runError(
+      '.a { color: rgba(#aabbccdd); }',
+      'Only 3 or 6 character hex allowed in rgba',
+    )
     runError('.a { color: rgb(#abcd); }', 'Only 3 or 6 character hex allowed in rgba')
     runError('.a { color: rgb(#1); }', 'Only 3 or 6 character hex allowed in rgba')
   })
