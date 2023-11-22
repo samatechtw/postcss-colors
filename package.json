@@ -1,6 +1,6 @@
 {
   "name": "@samatech/postcss-colors",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "PostCSS plugin that provides various color related transforms",
   "keywords": [
     "postcss",
@@ -10,11 +10,12 @@
     "hexrgba",
     "rgba"
   ],
+  "type": "module",
   "author": "SamaTech <samatechtw@gmail.com>",
   "license": "MIT",
   "repository": "samatechtw/postcss-colors",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "vitest run",
     "lint": "eslint --ext .js index.js test/",
     "format": "prettier -w \"{**/*,*}.{ts,js,json}\" --fix"
   },
@@ -22,43 +23,28 @@
     "node": ">=12.0"
   },
   "peerDependencies": {
-    "postcss": "^8.4.21"
+    "postcss": "^8.4.31"
   },
   "devDependencies": {
-    "eslint": "^8.32.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.4",
-    "eslint-plugin-jest": "^27.2.1",
-    "eslint-plugin-n": "^15.6.1",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
-    "jest": "^29.3.1",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.3"
+    "prettier": "^3.1.0",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
     "postcss-value-parser": "^4.2.0"
   },
   "eslintConfig": {
-    "env": {
-      "jest/globals": true
-    },
-    "plugins": [
-      "jest"
-    ],
     "extends": [
       "standard",
       "plugin:prettier/recommended"
     ]
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coverageThreshold": {
-      "global": {
-        "statements": 100
-      }
-    }
   }
 }

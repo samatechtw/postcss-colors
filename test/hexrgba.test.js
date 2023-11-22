@@ -1,4 +1,5 @@
-const { run, runError } = require('./util')
+import { it, describe } from 'vitest'
+import { run, runError } from './util'
 
 describe('Tests for converting hex within rgb/rgba functions', () => {
   it('works with basic hex colors', () => {

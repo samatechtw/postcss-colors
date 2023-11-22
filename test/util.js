@@ -1,6 +1,7 @@
-const postcss = require('postcss')
+import postcss from 'postcss'
+import { expect } from 'vitest'
 
-const plugin = require('../')
+import plugin from '../'
 
 function runError(input, error) {
   const result = postcss([plugin()]).process(input, { from: '/test.css' })

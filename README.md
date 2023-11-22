@@ -44,8 +44,9 @@ If you do not use PostCSS, first add it according to [PostCSS docs].
 **Step 3:** Add the plugin to plugins list:
 
 ```javascript
+import postcssColors from '@samatech/postcss-colors'
 module.exports = {
-  plugins: require('@samatech/postcss-colors')({
+  plugins: postcssColors({
     // Options
   }),
 };
