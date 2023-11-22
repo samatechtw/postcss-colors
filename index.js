@@ -130,7 +130,7 @@ function handleHexa(decl, result) {
   decl.value = value
 }
 
-module.exports = () => {
+export default () => {
   return {
     postcssPlugin: '@samatech/postcss-colors',
 

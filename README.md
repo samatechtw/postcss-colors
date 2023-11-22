@@ -45,7 +45,7 @@ If you do not use PostCSS, first add it according to [PostCSS docs].
 
 ```javascript
 import postcssColors from '@samatech/postcss-colors'
-module.exports = {
+export default {
   plugins: postcssColors({
     // Options
   }),
