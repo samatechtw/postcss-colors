@@ -1,6 +1,6 @@
 {
   "name": "@samatech/postcss-colors",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "PostCSS plugin that provides various color related transforms",
   "main": "index.js",
   "keywords": [
